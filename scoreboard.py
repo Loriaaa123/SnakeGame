@@ -16,6 +16,8 @@ class Scoreboard(Turtle):
 
     def update_scoreboard(self):
         self.clear()
+        with open("high_score.txt") as file:
+            self.high_score = int(file.read())
         self.write(arg=f"Score: {self.score}   High Score: {self.high_score}", align=ALIGNMENT, font=FONT)
 
     def update_score(self):
@@ -25,5 +27,7 @@ class Scoreboard(Turtle):
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
+            with open("high_score.txt", mode="w") as file:
+             file.write(f"{self.high_score}")
         self.score = 0
         self.update_scoreboard()
